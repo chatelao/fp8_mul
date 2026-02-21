@@ -8,14 +8,17 @@ async def test_all_inputs(dut):
     """Test all possible pairs of 8-bit inputs."""
 
     async def store(operand, half, data):
-        dut.io_in[0].value = 0
-        dut.io_in[1].value = 0
-        dut.io_in[2].value = operand
-        dut.io_in[3].value = half
+        val = 0
+        val |= (0 << 0) # clock
+        val |= (0 << 1) # ctrl0
+        val |= (operand << 2) # ctrl1
+        val |= (half << 3) # ctrl2
         for i in range(4):
-            dut.io_in[4+i].value = data[i]
+            val |= (data[i] << (4+i))
+        dut.io_in.value = val
         await Timer(1, units="ms")
-        dut.io_in[0].value = 1
+        val |= (1 << 0) # clock high
+        dut.io_in.value = val
         await Timer(1, units="ms")
 
     fp8_mul_model = get_8bit_op(lambda a, b: a * b)
@@ -30,4 +33,4 @@ async def test_all_inputs(dut):
             await store(1, 0, in2[:4])
             await store(1, 1, in2[4:])
             correct = fp8_mul_model(i, j)
-            assert dut.io_out.value.binstr == f"{correct:08b}", f"{to_float(i)} ({i:08b}) * {to_float(j)} ({j:08b}) = {to_float(dut.io_out.value.integer)} ({dut.io_out.value.integer:08b}), should be {to_float(correct)} ({correct:08b})"
+            assert str(dut.io_out.value) == f"{correct:08b}", f"{to_float(i)} ({i:08b}) * {to_float(j)} ({j:08b}) = {to_float(dut.io_out.value.integer)} ({dut.io_out.value.integer:08b}), should be {to_float(correct)} ({correct:08b})"

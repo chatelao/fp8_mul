@@ -1,4 +1,4 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg)
+![](../../workflows/tt/badge.svg)
 
 # What is Tiny Tapeout?
 
@@ -19,7 +19,7 @@ Please see the instructions for:
 
 ## How does it work?
 
-When you edit the info.yaml to choose a different ID, the [GitHub Action](.github/workflows/gds.yaml) will fetch the digital netlist of your design from Wokwi.
+When you edit the info.yaml to choose a different ID, the [GitHub Action](.github/workflows/tt.yaml) will fetch the digital netlist of your design from Wokwi.
 
 After that, the action uses the open source ASIC tool called [OpenLane](https://www.zerotoasiccourse.com/terminology/openlane/) to build the files needed to fabricate an ASIC.
 
