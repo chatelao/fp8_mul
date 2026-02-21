@@ -13,8 +13,8 @@ project:
 #
 # This info will be automatically collected and used to make a datasheet for the chip.
 documentation: 
-  author:       "Clive Chan"      # Your name
-  discord:      "mrgoose#9005"      # Your discord handle - make sure to include the # part as well
+  author:       "Olivier Chatelain"      # Your name
+  discord:      "evertex"      # Your discord handle - make sure to include the # part as well
   title:        "8-bit (E4M3) Floating Point Multiplier"      # Project title
   description:  "8-bit (E4M3) Floating Point Multiplier"      # Short description of what your project does
   how_it_works: >
